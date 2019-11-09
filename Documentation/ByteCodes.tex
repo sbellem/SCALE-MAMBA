@@ -40,7 +40,7 @@ communication channels with the associated threads in all
 other players' runtime environments.
 These communication channels, like all communication channels
 in SCALE, are secured via TLS.
-The threads actually have two channels to the correspond
+The threads actually have three channels to the corresponding
 thread in the other parties; we call these different channels
 ``connections''.
 For the online thread ``connection'' zero is used for standard
@@ -52,6 +52,79 @@ Each online thread is supported by four other threads
 performing the offline phase, each again with pairwise 
 TLS secured point-to-point channels. Currently the offline
 threads only communicate on ``connection'' zero.
+A single offline thread produces authenticated bits, aBits,
+by OT-extension, whilst another produced authenticated 
+triples for GC operations, so called aANDs.
+
+\begin{figure}[htb!]
+\begin{center}
+\begin{picture}{(370,360)}
+
+\put(0,65){\framebox(50,30){FHE Fact 1}}
+\put(0,115){\framebox(50,30){FHE Fact 2}}
+\put(50,130){\line(1,-1){25}}
+\put(50,80){\line(1,1){25}}
+\put(75,105){\line(1,0){25}}
+\put(100,15){\line(0,1){300}}
+\put(100,315){\vector(1,0){20}}
+\put(100,275){\vector(1,0){20}}
+\put(100,235){\vector(1,0){20}}
+\put(100,195){\vector(1,0){20}}
+\put(100,135){\vector(1,0){20}}
+\put(100,95){\vector(1,0){20}}
+\put(100,55){\vector(1,0){20}}
+\put(100,15){\vector(1,0){20}}
+
+
+\put(40,235){\framebox(50,30){aAND}}
+\put(0,190){\framebox(50,30){aBit}}
+
+%aBit->aAND
+\put(25,220){\vector(1,1){15}}
+
+%aBit->Online
+\put(25,220){\line(0,1){140}}
+\put(25,360){\line(1,0){345}}
+\put(370,360){\line(0,-1){275}}
+\put(370,85){\vector(-1,0){57}}
+\put(370,225){\vector(-1,0){57}}
+
+%aAND->Online
+\put(65,265){\line(0,1){80}}
+\put(65,345){\line(1,0){295}}
+\put(360,345){\line(0,-1){250}}
+\put(360,95){\vector(-1,0){47}}
+\put(360,235){\vector(-1,0){47}}
+
+\put(120,300){\framebox(50,30){Mult Triples}}
+\put(170,315){\vector(3,-2){92}}
+\put(120,260){\framebox(50,30){Square Pairs}}
+\put(170,275){\vector(3,-1){83}}
+\put(120,220){\framebox(50,30){Bits Pairs}}
+\put(170,235){\vector(1,0){87}}
+\put(120,180){\framebox(70,30){Sacrifice/Inputs}}
+\put(190,185){\vector(2,1){65}}
+
+\put(260,220){\framebox(50,30){Online Two}}
+
+
+\put(120,120){\framebox(50,30){Mult Triples}}
+\put(170,135){\vector(3,-1){84}}
+\put(120,80){\framebox(50,30){Square Pairs}}
+\put(170,95){\vector(1,0){83}}
+\put(120,40){\framebox(50,30){Bits Pairs}}
+\put(170,55){\vector(3,1){88}}
+\put(120,0){\framebox(70,30){Sacrifice/Inputs}}
+\put(190,15){\vector(1,1){67}}
+
+\put(260,80){\framebox(50,30){Online One}}
+
+\end{picture}
+\end{center}
+\caption{Pictorial View of a Player's Threads: With Two
+Online Threads and Two FHE Factory Threads}
+\label{fig:threads}
+\end{figure}
 
 In the case of Full Threshold secret sharing another set of
 threads act as a factory for FHE ciphertexts. Actively secure
@@ -104,9 +177,9 @@ by reading and writing to the virtual machine's main memory.
 This holds even if the two consequtive bytecode
 sequences run  on the same ``core''.
 
-\subsection{Bytecode instructions}
+\subsection{Byte-code Instructions}
 
-The design of the Bytecode instructions within a tape are influenced
+The design of the byte-code instructions within a tape are influenced
 by the RISC design strategy, coming in only a few basic
 types and mostly taking between one and three
 operands. The virtual machine also supports a limited form of
@@ -195,7 +268,7 @@ back we provide the conversion routines.
 These are needed as the internal mod $p$ representation
 of clear data is in Montgomery representation.
 
-\subsection{Preprocessing loading instructions}
+\subsection{Preprocessing Loading Instructions}
 The instructions for loading data from the preprocessing phase
 are denoted \verb+TRIPLE+, \verb+SQUARE+, \verb+BIT+,
 and they take as argument three, two, and one secret registers 
@@ -203,7 +276,8 @@ respectively.
 The associated data is loaded from the concurrently running
 offline threads and loaded into the registers given as arguments.
 
-\subsection{Open instructions}
+\subsection{Open Instructions}
+There are tailor-made approaches to open registers depending on whether they are $\modp$ or $\modn$. We detail both in this section. 
 
 The process of opening secret values is covered by two instructions.
 The \verb+STARTOPEN+ instruction takes as input a set of $m$
@@ -226,7 +300,11 @@ at once, so care must be taken to avoid this when compiling or writing
 bytecode (the Python compiler could automatically detect and avoid
 this).
 
-\subsection{Threading tools}
+\subsubsection{Instructions for mod $2^n$ registers}
+When operating on $\modn$, there are two register types that need to be open. In that sense we have a simplified process with 2 instructions, one for each type, namely \verb+OPENSINT+ for \verb+sregint+ and \verb+OPENSBIT+ for \verb|sbit|.
+These execute the conversion routines using \verb+daBits+ from \cite{daBitPaper}.
+
+\subsection{Threading Tools}
 Various special instructions are provided to ease the workload when writing
 programs that use multiple tapes. 
 \begin{itemize}
@@ -306,7 +384,7 @@ These bytecodes are
     PRINTFLOATPLAIN,    PRINTFIXPLAIN.
 \end{verbatim}
 
-\subsection{Data input and output}
+\subsection{Data Input and Output}
 This is entirely dealt with in the later Chapter on IO.
 The associated bytecodes are
 \begin{verbatim}
@@ -322,14 +400,31 @@ Branching is supported by the following
 instructions
  \verb+JMP+,
     \verb+JMPNZ+,
-    \verb+JMPEQZ+,
-    \verb+EQZC+,
-    \verb+LTZC+,
-    \verb+LTC+,
-    \verb+GTC+,
-    \verb+EQC+,
-and
-    \verb+JMPI+.
+    \verb+JMPEQZ+.
+
+\subsection{Call/Return}
+Call and return to subroutines is supported by the following
+instructions
+\verb+CALL+ and \verb+RETURN+.
+
+\subsection{Comparison Tests for $\modn$}
+We support comparison on $\modn$ clear registers via the instructions
+\verb+EQZINT+, \verb+LTZINT+, \verb+LTINT+, \verb+GTINT+, and \verb+EQINT+.
+
+We also support instructions for comparison tests on $\modn$ secret registers. These return 
+secret $\mod \; 2$ registers (\verb+sbit+), and can be used in conjunction with the logic $\modn$ operators described above. The instructions are the following: 
+\verb+LTZSINT+ ,
+\verb+EQZSINT+.
+
+\subsection{User Defined RunTime Extensions}
+The instruction \verb+GC+ allows the running of user defined
+circuits via the Garbled Circuit engine.
+See Section \ref{sec:GC} for more details.
+
+The instructions \verb|LF_CINT|, \verb|LF_SINT|, \verb|LF_REGINT| 
+and \verb|LF_SREGINT| allow one to execute user defined
+local functions.
+See Section \ref{sec:Local} for more details.
 
 \subsection{Other Commands}
 The following byte codes are for fine tuning the machine
