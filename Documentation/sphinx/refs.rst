@@ -1,0 +1,4 @@
+References
+==========
+
+.. bibliography:: ../SCALE.bib
