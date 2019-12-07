@@ -7,4 +7,4 @@ jobs:
    steps:
      - checkout
      - run: docker build --no-cache -t scale-mamba -f py2.Dockerfile .
-     - run: .ci/test-programs.sh
+     - run: .circleci/test-programs.sh
