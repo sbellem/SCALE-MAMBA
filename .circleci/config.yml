@@ -5,7 +5,7 @@ jobs:
     environment:
       TEST_SET: 1
       PROGRAMS: "test_array test_branch"
-   steps:
-     - checkout
-     - run: docker build --no-cache -t scale-mamba -f py2.Dockerfile .
-     - run: .circleci/test-programs.sh
+    steps:
+      - checkout
+      - run: docker build --no-cache -t scale-mamba -f py2.Dockerfile .
+      - run: .circleci/test-programs.sh
