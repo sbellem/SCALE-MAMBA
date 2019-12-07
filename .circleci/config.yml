@@ -1,8 +1,10 @@
 version: 2
 jobs:
-  build:
-    docker:
-      - image: circleci/ruby:2.4.1
-    steps:
-      - checkout
-      - run: echo "A first hello"
+ build:
+   machine: true
+   environment:
+      PROGRAMS: "test_array test_branch"
+   steps:
+     - checkout
+     - run: docker build --no-cache -t scale-mamba -f py2.Dockerfile .
+     - run: .ci/test-programs.sh
