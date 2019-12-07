@@ -1,8 +1,9 @@
 version: 2
 jobs:
- build:
-   machine: true
-   environment:
+  build:
+    machine: true
+    environment:
+      TEST_SET: 1
       PROGRAMS: "test_array test_branch"
    steps:
      - checkout
