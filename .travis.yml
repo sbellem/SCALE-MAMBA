@@ -1,3 +1,4 @@
+version: ~> 1.0
 os: linux
 dist: bionic
 language: python
@@ -63,27 +64,27 @@ jobs:
         - PROGRAMS="test_sqrt test_custom_array test_fix_array test_all"
       install: skip
       script: .ci/test-programs.sh
-    - name: test set 1, program failure: "test_count"
+    - name: test set 1, program failure -- "test_count"
       env:
         - PROGRAMS="test_count"
       install: skip
       script: .ci/test-programs.sh
-    - name: test set 1, program failure: "test_for_range_multithread"
+    - name: test set 1, program failure -- "test_for_range_multithread"
       env:
         - PROGRAMS="test_for_range_multithread"
       install: skip
       script: .ci/test-programs.sh
-    - name: test set 1, program failure: "test_map_reduce"
+    - name: test set 1, program failure -- "test_map_reduce"
       env:
         - PROGRAMS="test_map_reduce"
       install: skip
       script: .ci/test-programs.sh
-    - name: test set 1, program failure: "test_new_threads"
+    - name: test set 1, program failure -- "test_new_threads"
       env:
         - PROGRAMS="test_new_threads"
       install: skip
       script: .ci/test-programs.sh
-    - name: test set 1, program failure: "test_math"
+    - name: test set 1, program failure -- "test_math"
       env:
         - PROGRAMS="test_math"
       install: skip
