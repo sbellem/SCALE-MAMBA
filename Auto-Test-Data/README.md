@@ -1,3 +1,4 @@
+# Auto Tests
 This directory contains files needed for the auto-testing of the system
 
 The data sets are created on the assumption that the DEFAULT
@@ -40,26 +41,27 @@ To execute ALL the tests type
 in the main directory. And be prepared to wait ages and ages
 
 
+## Additional Tests
 One should also test...
 
-**Full Threshold 128 bit prime : 2 and 3 players**
+### Full Threshold 128 bit prime : 2 and 3 players
 - To test the main usage of two players
 - `Programs/IO_demo`          <- Tests IO
 - `Programs/mult_demo`        <- Run for an hour or so to test factory production
 
-**Full Threshold 16 bit prime : 2 player only**
+### Full Threshold 16 bit prime : 2 player only
 - To test more than one MAC
 - `Programs/IO_demo`          <- Tests IO
 - `Programs/mult_demo`        <- Run for an hour or so to test factory production
 
-**The restart programs**
-- See below for instructions
+### The restart programs
+See below for instructions
 
 
-### LSSS
+## LSSS
 The specific LSSS are...
 
-#### Unqualified example
+### Unqualified example
 The unqualified example has maximal unqualified sets
 
 ```
@@ -69,7 +71,7 @@ The unqualified example has maximal unqualified sets
         0 0 1 1
 ```
 
-#### Qualified example
+### Qualified example
 The qualified example has minimal qualified sets
 
 ```
@@ -79,10 +81,10 @@ The qualified example has minimal qualified sets
         0 1 1 1
 ```
 
-#### Q2 examples
+### Q2 examples
 The Q2 examples are...
 
-##### Q2 MSPs
+#### Q2 MSPs
 
 **Case 1**: `n=3`  (Shamir by another name)
 ```
@@ -194,7 +196,7 @@ This tests the extension to multiplicative MSP is working
 ```
 
 
-### Restart Testing
+## Restart Testing
 Go to the main directory
 
 ```shell
