@@ -38,9 +38,8 @@ env:
     #  - docker tag scale-mamba-deps $DOCKER_USERNAME/scale-mamba-deps
     #  - docker push $DOCKER_USERNAME/scale-mamba-deps
 stages:
-  include:
   - name: build
-    env: TEST_SET=1
+    #env: TEST_SET=none
     install: skip
     script:
       - docker build --no-cache -t scale-mamba -f py2.Dockerfile .
