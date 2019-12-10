@@ -20,6 +20,10 @@ stages:
   - test
 
 jobs:
+  allow_failures:
+    - env: TEST_SET=20
+    - env: TEST_SET=21
+    - env: TEST_SET=25
   include:
     # TODO: Only perform this step if the file deps.Dockerfile changed.
     # https://docs.travis-ci.com/user/conditional-builds-stages-jobs/#conditional-stages
