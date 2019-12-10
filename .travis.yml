@@ -24,11 +24,6 @@ stages:
   - build
   - test
 
-test: &test
-  stage: test
-  install: skip
-  script: .ci/run_tests.sh
-
 jobs:
   include:
     # TODO: Only perform this step if the file deps.Dockerfile changed.
@@ -50,72 +45,75 @@ jobs:
       - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
       - docker tag scale-mamba $DOCKER_USERNAME/scale-mamba:$COMMIT
       - docker push $DOCKER_USERNAME/scale-mamba:$COMMIT
-  - <<: *test
-    env:
-      - TEST_SET=1
-  - <<: *test
-    env:
-      - TEST_SET=2
-  - <<: *test
-    env:
-      - TEST_SET=3
-  - <<: *test
-    env:
-      - TEST_SET=4
-  - <<: *test
-    env:
-      - TEST_SET=5
-  - <<: *test
-    env:
-      - TEST_SET=6
-  - <<: *test
-    env:
-      - TEST_SET=7
-  - <<: *test
-    env:
-      - TEST_SET=8
-  - <<: *test
-    env:
-      - TEST_SET=9
-  - <<: *test
-    env:
-      - TEST_SET=10
-  - <<: *test
-    env:
-      - TEST_SET=11
-  - <<: *test
-    env:
-      - TEST_SET=12
-  - <<: *test
-    env:
-      - TEST_SET=13
-  - <<: *test
-    env:
-      - TEST_SET=14
-  - <<: *test
-    env:
-      - TEST_SET=15
-  - <<: *test
-    env:
-      - TEST_SET=16
-  - <<: *test
-    env:
-      - TEST_SET=17
-  - <<: *test
-    env:
-      - TEST_SET=18
-  - <<: *test
-    env:
-      - TEST_SET=19
-  - <<: *test
-    env:
-      - TEST_SET=22
-  - <<: *test
-    env:
-      - TEST_SET=23
-  - <<: *test
-    env:
-      - TEST_SET=24
+    - &test
+      stage: test
+      env:
+        - TEST_SET=1
+      install: skip
+      script: .ci/run_tests.sh
+    - <<: *test
+      env:
+        - TEST_SET=2
+    - <<: *test
+      env:
+        - TEST_SET=3
+    - <<: *test
+      env:
+        - TEST_SET=4
+    - <<: *test
+      env:
+        - TEST_SET=5
+    - <<: *test
+      env:
+        - TEST_SET=6
+    - <<: *test
+      env:
+        - TEST_SET=7
+    - <<: *test
+      env:
+        - TEST_SET=8
+    - <<: *test
+      env:
+        - TEST_SET=9
+    - <<: *test
+      env:
+        - TEST_SET=10
+    - <<: *test
+      env:
+        - TEST_SET=11
+    - <<: *test
+      env:
+        - TEST_SET=12
+    - <<: *test
+      env:
+        - TEST_SET=13
+    - <<: *test
+      env:
+        - TEST_SET=14
+    - <<: *test
+      env:
+        - TEST_SET=15
+    - <<: *test
+      env:
+        - TEST_SET=16
+    - <<: *test
+      env:
+        - TEST_SET=17
+    - <<: *test
+      env:
+        - TEST_SET=18
+    - <<: *test
+      env:
+        - TEST_SET=19
+    - <<: *test
+      env:
+        - TEST_SET=22
+    - <<: *test
+      env:
+        - TEST_SET=23
+    - <<: *test
+      env:
+        - TEST_SET=24
       #- stage: Tests
       #  name: test set 1, program batch 1
       #  env:
