@@ -139,7 +139,7 @@ The Q2 examples are...
          0 0 1 0
 ```
 
-**Case 5**: `n=4`  Delta^+ = 0,12,23; Gamma^- = 01,02,03,13
+**Case 5**: `n=4`  `Delta^+ = 0,12,23`; `Gamma^- = 01,02,03,13`
 
 This test the assignment of channels in the online phase as it is
 non-trivial in this case
@@ -155,7 +155,7 @@ non-trivial in this case
          1 -1  1
 ```
 
-**Case 6**: n=4  Delta^+ = 0,12,13,23; Gamma^- = 01,02,03,123   Not Mult
+**Case 6**: `n=4`  `Delta^+ = 0,12,13,23`; `Gamma^- = 01,02,03,123`   Not Mult
 
 This tests the extension to multiplicative MSP is working
 
