@@ -40,54 +40,58 @@ jobs:
       - docker tag scale-mamba $DOCKER_USERNAME/scale-mamba:$COMMIT
       - docker push $DOCKER_USERNAME/scale-mamba:$COMMIT
     - stage: Tests
-      name: test set 1, program batch 1
-      env:
-        - PROGRAMS="test_array test_branch test_branching test_comparison
-          test_empty_tape test_flex test_float test_floatingpoint"
+      #name: tests
       install: skip
-      script: .ci/test-programs.sh
-    - name: test set 1, program batch 2
-      env:
-        - PROGRAMS="test_float_sorting test_float_vector test_function test_idle_threads
-          test_lib test_loop test_mem_order"
-      install: skip
-      script: .ci/test-programs.sh
-    - name: test set 1, program batch 3
-      env:
-        - PROGRAMS="test_sregint test_vector test_sfix test_sqrt test_custom_array
-          test_fix_array test_all"
-      install: skip
-      script: .ci/test-programs.sh
-    - name: test set 1, program failure -- "test_count"
-      env:
-        - PROGRAMS="test_count"
-      install: skip
-      script: .ci/test-programs.sh
-    - name: test set 1, program failure -- "test_for_range_multithread"
-      env:
-        - PROGRAMS="test_for_range_multithread"
-      install: skip
-      script: .ci/test-programs.sh
-    - name: test set 1, program failure -- "test_map_reduce"
-      env:
-        - PROGRAMS="test_map_reduce"
-      install: skip
-      script: .ci/test-programs.sh
-    - name: test set 1, program failure -- "test_new_threads"
-      env:
-        - PROGRAMS="test_new_threads"
-      install: skip
-      script: .ci/test-programs.sh
-    - name: test set 1, program failure -- "test_math"
-      env:
-        - PROGRAMS="test_math"
-      install: skip
-      script: .ci/test-programs.sh
-    - name: test set 1, program failure -- "test_threads"
-      env:
-        - PROGRAMS="test_threads"
-      install: skip
-      script: .ci/test-programs.sh
+      script: .ci/run_tests.sh
+      #- stage: Tests
+      #  name: test set 1, program batch 1
+      #  env:
+      #    - PROGRAMS="test_array test_branch test_branching test_comparison
+      #      test_empty_tape test_flex test_float test_floatingpoint"
+      #  install: skip
+      #  script: .ci/test-programs.sh
+      #- name: test set 1, program batch 2
+      #  env:
+      #    - PROGRAMS="test_float_sorting test_float_vector test_function test_idle_threads
+      #      test_lib test_loop test_mem_order"
+      #  install: skip
+      #  script: .ci/test-programs.sh
+      #- name: test set 1, program batch 3
+      #  env:
+      #    - PROGRAMS="test_sregint test_vector test_sfix test_sqrt test_custom_array
+      #      test_fix_array test_all"
+      #  install: skip
+      #  script: .ci/test-programs.sh
+      #    - name: test set 1, program failure -- "test_count"
+      #      env:
+      #        - PROGRAMS="test_count"
+      #      install: skip
+      #      script: .ci/test-programs.sh
+      #    - name: test set 1, program failure -- "test_for_range_multithread"
+      #      env:
+      #        - PROGRAMS="test_for_range_multithread"
+      #      install: skip
+      #      script: .ci/test-programs.sh
+      #    - name: test set 1, program failure -- "test_map_reduce"
+      #      env:
+      #        - PROGRAMS="test_map_reduce"
+      #      install: skip
+      #      script: .ci/test-programs.sh
+      #    - name: test set 1, program failure -- "test_new_threads"
+      #      env:
+      #        - PROGRAMS="test_new_threads"
+      #      install: skip
+      #      script: .ci/test-programs.sh
+      #    - name: test set 1, program failure -- "test_math"
+      #      env:
+      #        - PROGRAMS="test_math"
+      #      install: skip
+      #      script: .ci/test-programs.sh
+      #    - name: test set 1, program failure -- "test_threads"
+      #      env:
+      #        - PROGRAMS="test_threads"
+      #      install: skip
+      #      script: .ci/test-programs.sh
       #- stage: Documentation
       #  install: skip
       #  script: docker run --rm $DOCKER_USERNAME/scale-mamba:$COMMIT make doc
