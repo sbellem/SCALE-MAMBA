@@ -43,7 +43,7 @@ jobs:
       env:
         - TEST_SET=1
       install: skip
-      script: docker run --rm --env TEST_SET $IMAGE_TAG sh .ci/run_tests.sh
+      script: docker run --rm --env TEST_SET $IMAGE_TAG ./.ci/run_tests.sh
     - <<: *test
       env:
         - TEST_SET=2
