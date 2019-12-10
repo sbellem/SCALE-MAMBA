@@ -46,12 +46,16 @@ jobs:
         - TEST_SET=25
       install: skip
       script: docker run --rm --env TEST_SET $IMAGE_TAG ./.ci/run_tests_n-10.sh
+      after_failure:
+        - bash .ci/after_failure.sh
     - &test32bit
       stage: test32bit
       env:
         - TEST_SET=20
       install: skip
       script: docker run --rm --env TEST_SET $IMAGE_TAG ./.ci/run_tests_32.sh
+      after_failure:
+        - bash .ci/after_failure.sh
     - <<: *test32bit
       env:
         - TEST_SET=21
@@ -61,6 +65,8 @@ jobs:
         - TEST_SET=1
       install: skip
       script: docker run --rm --env TEST_SET $IMAGE_TAG ./.ci/run_tests.sh
+      after_failure:
+        - bash .ci/after_failure.sh
     - <<: *test
       env:
         - TEST_SET=2
