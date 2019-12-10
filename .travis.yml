@@ -40,7 +40,7 @@ env:
 stages:
   include:
   - name: build
-    env: TEST_SET=none
+    env: TEST_SET=1
     install: skip
     script:
       - docker build --no-cache -t scale-mamba -f py2.Dockerfile .
