@@ -20,12 +20,12 @@ env:
     - TEST_SET=6
     - TEST_SET=7
 
-#stages:
-#  - build
-#  - test
+stages:
+  - build
+  - test
 
-    #jobs:
-    #  include:
+jobs:
+  include:
     # TODO: Only perform this step if the file deps.Dockerfile changed.
     # https://docs.travis-ci.com/user/conditional-builds-stages-jobs/#conditional-stages
     # https://stackoverflow.com/a/38550849/2769475
@@ -37,18 +37,17 @@ env:
     #  - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
     #  - docker tag scale-mamba-deps $DOCKER_USERNAME/scale-mamba-deps
     #  - docker push $DOCKER_USERNAME/scale-mamba-deps
-stages:
-  - name: build
-    #env: TEST_SET=none
-    install: skip
-    script:
+    - stage: build
+      env: TEST_SET=none
+      install: skip
+      script:
       - docker build --no-cache -t scale-mamba -f py2.Dockerfile .
       - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
       - docker tag scale-mamba $DOCKER_USERNAME/scale-mamba:$COMMIT
       - docker push $DOCKER_USERNAME/scale-mamba:$COMMIT
-  - name: test
-    install: skip
-    script: .ci/run_tests.sh
+    - stage: test
+      install: skip
+      script: .ci/run_tests.sh
       #- stage: Tests
       #  name: test set 1, program batch 1
       #  env:
