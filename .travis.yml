@@ -15,9 +15,9 @@ env:
 
 stages:
   - build
-  - testn10
   - test32bit
   - test
+  - testn10
 
 jobs:
   include:

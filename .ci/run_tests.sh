@@ -13,7 +13,7 @@ echo Running testscript on set $TEST_SET
 
 programs=(
     test_array
-    test_branch
+    #test_branch
     #test_branching
     #test_comparison
     #test_empty_tape
