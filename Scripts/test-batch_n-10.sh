@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Test script for a large number of players
+# Avoids programs with a lot of threads
+
 # Portably find the directory containing this script.
 HERE=$(cd `dirname $0`; pwd)
 # Assuming it lives in Scripts/, set ROOT to the root directory of the
@@ -33,6 +36,7 @@ run_test() {
 
 test_opts="-s"
 compile_opts="--stop"
+#for test in test_array test_branch test_branching test_comparison test_empty_tape test_flex test_float test_floatingpoint test_float_sorting test_float_vector test_function test_idle_threads test_lib test_loop test_mem_order test_sregint test_vector test_sfix test_sqrt test_math test_custom_array test_all; do
 for test in "$@"; do
     run_test $test
 done

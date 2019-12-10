@@ -107,6 +107,20 @@ jobs:
     - <<: *test
       env:
         - TEST_SET=24
+    - &test32bit
+      stage: test32bit
+      env:
+        - TEST_SET=20
+      install: skip
+      script: docker run --rm --env TEST_SET $IMAGE_TAG ./.ci/run_tests_32.sh
+    - <<: *test32bit
+      env:
+        - TEST_SET=21
+    - stage: test-n-10
+      env:
+        - TEST_SET=25
+      install: skip
+      script: docker run --rm --env TEST_SET $IMAGE_TAG ./.ci/run_tests_n-10.sh
       #- stage: Tests
       #  name: test set 1, program batch 1
       #  env:
