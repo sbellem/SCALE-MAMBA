@@ -3,6 +3,7 @@ This directory contains files needed for the auto-testing of the system
 The data sets are created on the assumption that the DEFAULT
 parameters (in `config.h`) are used to compile the main programs.
 
+```
   1 Shamir        (3,1)
   2 Replicated    (3,1) Maurer
   3 Replicated    (3,1) Reduced
@@ -28,7 +29,7 @@ parameters (in `config.h`) are used to compile the main programs.
  23 Replicated    (5,2) Maurer
  24 Replicated    (5,2) Reduced
  25 Shamir        (10,4)
-
+```
 
 To execute ALL the tests type
 
@@ -55,9 +56,11 @@ One should also test...
 - See below for instructions
 
 
+### LSSS
 The specific LSSS are...
 
-1. The unqualified example has maximal unqualified sets
+#### Unqualified example
+The unqualified example has maximal unqualified sets
 
 ```
         1 0 0 0
@@ -66,7 +69,8 @@ The specific LSSS are...
         0 0 1 1
 ```
 
-2. The qualified example has minimal qualified sets
+#### Qualified example
+The qualified example has minimal qualified sets
 
 ```
         1 1 0 0
@@ -75,18 +79,23 @@ The specific LSSS are...
         0 1 1 1
 ```
 
-3. The Q2 examples are...
+#### Q2 examples
+The Q2 examples are...
 
-   Q2 MSPs
+##### Q2 MSPs
 
-   - Case 1: n=3  (Shamir by another name)
+**Case 1**: `n=3`  (Shamir by another name)
+```
          1 1 1
          2
 
          1 2
          1 3
          1 4
-   - Case 2: n=3  (Replicated threshold by another name)
+```
+
+**Case 2**: `n=3`  (Replicated threshold by another name)
+```
          2 2 2
          3
 
@@ -96,7 +105,11 @@ The specific LSSS are...
          0 0 1
          1 0 0
          0 1 0
-   - Case 3: n=4  (Shamir by another name)
+```
+
+**Case 3**: `n=4`  (Shamir by another name)
+
+```
          1 1 1 1
          2
 
@@ -104,7 +117,11 @@ The specific LSSS are...
          1 3
          1 4
          1 5
-   - Case 4: n=4  (Replicated threshold by another name)
+```
+
+**Case 4**: `n=4`  (Replicated threshold by another name)
+
+```
          3 3 3 3 
          4
 
@@ -120,12 +137,14 @@ The specific LSSS are...
          1 0 0 0
          0 1 0 0
          0 0 1 0
+```
 
-    - Case 5: n=4  Delta^+ = 0,12,23; Gamma^- = 01,02,03,13
+**Case 5**: `n=4`  Delta^+ = 0,12,23; Gamma^- = 01,02,03,13
 
-     This test the assignment of channels in the online phase as it is non-trivial
-     in this case
+This test the assignment of channels in the online phase as it is
+non-trivial in this case
 
+```
          2 1 1 1
          3
 
@@ -134,11 +153,13 @@ The specific LSSS are...
          1  0  1
          0  1  1
          1 -1  1
+```
 
-   - Case 6: n=4  Delta^+ = 0,12,13,23; Gamma^- = 01,02,03,123   Not Mult
+**Case 6**: n=4  Delta^+ = 0,12,13,23; Gamma^- = 01,02,03,123   Not Mult
 
-     This tests the extension to multiplicative MSP is working
+This tests the extension to multiplicative MSP is working
 
+```
          3 2 2 2
          6
 
@@ -151,8 +172,10 @@ The specific LSSS are...
          0 0 0 0 1 0
          0 0 0 1 0 0
          0 0 0 0 0 1
+```
 
-   - Case 7 : n=4 This is the DNF sharing for threshold (4,1)
+**Case 7**: `n=4` This is the DNF sharing for threshold (4,1)
+```
          3 3 3 3 
          7 
 
@@ -168,7 +191,7 @@ The specific LSSS are...
          0 0 0 1 0 0 0
          0 0 0 0 0 1 0
          0 0 0 0 0 0 1 
-
+```
 
 
 ### Restart Testing
