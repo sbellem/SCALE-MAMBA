@@ -68,7 +68,7 @@ jobs:
     - &test
       stage: test
       env:
-        - TEST_SET=1
+        - TEST_SET=7
       install: skip
       script: docker run --env TEST_SET $IMAGE_TAG ./.ci/run_tests.sh
       after_failure:
@@ -76,7 +76,7 @@ jobs:
         - bash .ci/after_failure.sh
     - <<: *test
       env:
-        - TEST_SET=7
+        - TEST_SET=1
     - <<: *test
       env:
         - TEST_SET=8
