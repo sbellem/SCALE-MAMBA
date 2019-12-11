@@ -27,12 +27,10 @@ programs=(
     test_lib
     test_loop
     test_mem_order
-    test_sregint
     test_vector
     test_sfix
     test_sqrt
     test_custom_array
-    test_fix_array
     test_all
 )
 

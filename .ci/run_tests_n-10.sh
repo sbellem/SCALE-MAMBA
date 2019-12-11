@@ -28,7 +28,6 @@ programs=(
     test_lib
     test_loop
     test_mem_order
-    test_sregint
     test_vector
     test_sfix
     test_sqrt
