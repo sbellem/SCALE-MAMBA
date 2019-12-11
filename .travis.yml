@@ -15,9 +15,9 @@ env:
 
 stages:
   - build
-  - testn10
-  - test32bit
   - test
+  - test32bit
+  - testn10
 
 jobs:
   allow_failures:
@@ -76,21 +76,6 @@ jobs:
         - bash .ci/after_failure.sh
     - <<: *test
       env:
-        - TEST_SET=2
-    - <<: *test
-      env:
-        - TEST_SET=3
-    - <<: *test
-      env:
-        - TEST_SET=4
-    - <<: *test
-      env:
-        - TEST_SET=5
-    - <<: *test
-      env:
-        - TEST_SET=6
-    - <<: *test
-      env:
         - TEST_SET=7
     - <<: *test
       env:
@@ -107,6 +92,21 @@ jobs:
     - <<: *test
       env:
         - TEST_SET=12
+    - <<: *test
+      env:
+        - TEST_SET=2
+    - <<: *test
+      env:
+        - TEST_SET=3
+    - <<: *test
+      env:
+        - TEST_SET=4
+    - <<: *test
+      env:
+        - TEST_SET=5
+    - <<: *test
+      env:
+        - TEST_SET=6
     - <<: *test
       env:
         - TEST_SET=13
